@@ -17,7 +17,7 @@ This script will:
 - ✅ Create `validator-config.yaml` with hex-encoded private keys
   - Nodes named `ream_0` through `ream_3`
   - Each node on internal IP `172.20.0.10-13` with port `9000`
-  - Each node has **2** validators (8 total)
+  - Each node has **1** validator (4 total)
 - ✅ Create `config.yaml` with genesis time (1 minute buffer)
 - ✅ Run `eth-genesis-state-generator` using Docker
 
@@ -30,11 +30,11 @@ docker-compose up -d
 # View logs
 docker-compose logs -f
 
-# Access node APIs
-curl http://localhost:5052/eth/v1/node/health  # Node 1
-curl http://localhost:5053/eth/v1/node/health  # Node 2
-curl http://localhost:5054/eth/v1/node/health  # Node 3
-curl http://localhost:5055/eth/v1/node/health  # Node 4
+# Access lean node APIs
+curl http://localhost:5052/lean/v0/head  # Node 0
+curl http://localhost:5053/lean/v0/head  # Node 1
+curl http://localhost:5054/lean/v0/head  # Node 2
+curl http://localhost:5055/lean/v0/head  # Node 3
 ```
 
 ### 3. Cleanup
@@ -58,8 +58,8 @@ REAM_IMAGE=ream:local docker-compose up
 ## Network Configuration
 
 - **Network**: `172.20.0.0/24`
-- **Nodes**: 4 nodes with 2 validators each
+- **Nodes**: 4 nodes with 1 validator each
 - **Ports**:
-  - P2P: 9000-9003 (UDP)
+  - P2P: 9000-9003 (QUIC)
   - API: 5052-5055 (HTTP)
   - Metrics: 8080-8083
