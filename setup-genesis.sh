@@ -63,7 +63,15 @@ echo "validator-config.yaml generated successfully"
 # Generate config.yaml with genesis time (1 minute buffer)
 echo -e "${YELLOW}Generating config.yaml with genesis time...${NC}"
 GENESIS_TIME=$(($(date +%s) + 60))
-echo "Genesis time set to: $(date -d @${GENESIS_TIME} '+%Y-%m-%d %H:%M:%S') (1 minute from now)"
+
+# Handle different date command syntax for Linux vs macOS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS (BSD date)
+    echo "Genesis time set to: $(date -r ${GENESIS_TIME} '+%Y-%m-%d %H:%M:%S') (1 minute from now)"
+else
+    # Linux (GNU date)
+    echo "Genesis time set to: $(date -d @${GENESIS_TIME} '+%Y-%m-%d %H:%M:%S') (1 minute from now)"
+fi
 
 cat > config.yaml << EOF
 # Genesis Settings
