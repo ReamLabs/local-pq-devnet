@@ -1,0 +1,32 @@
+# Generated configuration files
+config/
+genesis/
+validator-config.yaml
+config.yaml
+
+# Docker volumes
+node*-data/
+
+# Private keys (extra safety)
+*.key
+*.pem
+*.priv
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+.tmp/
