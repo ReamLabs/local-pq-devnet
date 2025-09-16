@@ -10,7 +10,7 @@ services:
       --validator-registry-path /genesis/validators.yaml
       --node-id ream_0
       --private-key-path /config/keys/node0.key
-      --socket-address 0.0.0.0
+      --socket-address 172.20.0.10
       --socket-port 9000
       --http-address 0.0.0.0
       --http-port 5052
@@ -41,7 +41,7 @@ services:
       --validator-registry-path /genesis/validators.yaml
       --node-id ream_1
       --private-key-path /config/keys/node1.key
-      --socket-address 0.0.0.0
+      --socket-address 172.20.0.11
       --socket-port 9000
       --http-address 0.0.0.0
       --http-port 5052
@@ -74,7 +74,7 @@ services:
       --validator-registry-path /genesis/validators.yaml
       --node-id ream_2
       --private-key-path /config/keys/node2.key
-      --socket-address 0.0.0.0
+      --socket-address 172.20.0.12
       --socket-port 9000
       --http-address 0.0.0.0
       --http-port 5052
@@ -108,7 +108,7 @@ services:
       --validator-registry-path /genesis/validators.yaml
       --node-id ream_3
       --private-key-path /config/keys/node3.key
-      --socket-address 0.0.0.0
+      --socket-address 172.20.0.13
       --socket-port 9000
       --http-address 0.0.0.0
       --http-port 5052
