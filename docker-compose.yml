@@ -5,6 +5,7 @@ services:
     image: ${REAM_IMAGE:-ghcr.io/reamlabs/ream:latest}
     container_name: ream-node0
     command: >
+      --data-dir /data
       lean_node
       --network /genesis/config.yaml
       --validator-registry-path /genesis/validators.yaml
@@ -36,6 +37,7 @@ services:
     image: ${REAM_IMAGE:-ghcr.io/reamlabs/ream:latest}
     container_name: ream-node1
     command: >
+      --data-dir /data
       lean_node
       --network /genesis/config.yaml
       --validator-registry-path /genesis/validators.yaml
@@ -69,6 +71,7 @@ services:
     image: ${REAM_IMAGE:-ghcr.io/reamlabs/ream:latest}
     container_name: ream-node2
     command: >
+      --data-dir /data
       lean_node
       --network /genesis/config.yaml
       --validator-registry-path /genesis/validators.yaml
@@ -103,6 +106,7 @@ services:
     image: ${REAM_IMAGE:-ghcr.io/reamlabs/ream:latest}
     container_name: ream-node3
     command: >
+      --data-dir /data
       lean_node
       --network /genesis/config.yaml
       --validator-registry-path /genesis/validators.yaml
