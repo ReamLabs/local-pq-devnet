@@ -36,18 +36,34 @@ done
 
 # Generate validator-config.yaml
 echo -e "${YELLOW}Generating validator-config.yaml...${NC}"
-cat > validator-config.yaml << EOF
+cat > ./genesis/validator-config.yaml << EOF
 shuffle: roundrobin
 validators:
 EOF
 
 # Add 4 nodes, each with 2 validators
-for i in {0..3}; do
+for i in {0..2}; do
     NODE_IP="172.20.0.$((10 + i))"
     NODE_PORT=9000  # All nodes use port 9000 internally
 
-    cat >> validator-config.yaml << EOF
+    cat >> ./genesis/validator-config.yaml << EOF
   - name: "ream_${i}"
+    privkey: "${PRIVATE_KEYS[$i]}"
+    enrFields:
+      ip: "${NODE_IP}"
+      quic: ${NODE_PORT}
+      seq: 1
+    count: 1
+
+EOF
+done
+# Add 4 nodes, each with 2 validators
+for i in {3..3}; do
+    NODE_IP="172.20.0.$((10 + i))"
+    NODE_PORT=9000  # All nodes use port 9000 internally
+
+    cat >> ./genesis/validator-config.yaml << EOF
+  - name: "zeam_${i}"
     privkey: "${PRIVATE_KEYS[$i]}"
     enrFields:
       ip: "${NODE_IP}"
@@ -88,7 +104,7 @@ echo -e "${YELLOW}Running eth-genesis-state-generator...${NC}"
 
 docker run --rm -v $(pwd):/data -it ethpandaops/eth-beacon-genesis:pk910-leanchain leanchain \
     --config /data/config.yaml \
-    --mass-validators /data/validator-config.yaml \
+    --mass-validators /data/genesis/validator-config.yaml \
     --state-output /data/genesis/genesis.ssz \
     --json-output /data/genesis/genesis.json \
     --nodes-output /data/genesis/nodes.yaml \
