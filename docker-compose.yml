@@ -103,14 +103,15 @@ services:
     restart: unless-stopped
 
   node3:
-    image: g11tech/zeam:latest
+    image: ${ZEAM_IMAGE:-g11tech/zeam:latest}
     container_name: zeam-node3
+    security_opt:
+      - seccomp=unconfined
     command: >
-      --security-opt seccomp=unconfined 
       node 
       --data-dir /data 
       --custom_genesis /genesis 
-      --validator_config /genesis/validator-config.yaml 
+      --validator_config genesis_bootnode
       --node-id zeam_3 
       --node-key /config/keys/node3.key
     ports:
