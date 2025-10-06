@@ -14,6 +14,7 @@ echo -e "${GREEN}Setting up local PQ devnet...${NC}"
 echo -e "${YELLOW}Creating directories...${NC}"
 mkdir -p config/keys
 mkdir -p genesis
+mkdir -p leanview-data
 
 # Use local image if available, otherwise use remote
 REAM_IMAGE=${REAM_IMAGE:-"ghcr.io/reamlabs/ream:latest"}

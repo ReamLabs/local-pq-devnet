@@ -124,6 +124,57 @@ services:
       - node2
     restart: unless-stopped
 
+  backend:
+    image: "syjn99/leanview-backend"
+    command: ["--config", "/app/config/docker.config.yml"]
+    ports:
+      - "9090:8080"
+    volumes:
+      - ./leanview-data:/app/data
+      - ./leanview-config:/app/config:ro
+    environment:
+      - DATABASE_FILE=/app/data/lean-view.sqlite
+      - API_HOST=0.0.0.0
+      - API_PORT=8080
+      - LOG_LEVEL=info
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8080/health",
+        ]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+    networks:
+      - ream-network
+
+  leanview-frontend:
+    image: "syjn99/leanview-frontend"
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost/health",
+        ]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+    networks:
+      - ream-network
+
 networks:
   ream-network:
     driver: bridge

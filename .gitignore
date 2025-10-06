@@ -30,3 +30,6 @@ Thumbs.db
 # Temporary files
 *.tmp
 .tmp/
+
+# leanview data
+leanview-data/
