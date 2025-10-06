@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   node0:
-    image: ${REAM_IMAGE:-ghcr.io/reamlabs/ream:latest}
+    image: ${REAM_IMAGE:-ethpandaops/ream:master}
     container_name: ream-node0
     command: >
       --data-dir /data
@@ -34,7 +34,7 @@ services:
     restart: unless-stopped
 
   node1:
-    image: ${REAM_IMAGE:-ghcr.io/reamlabs/ream:latest}
+    image: ${REAM_IMAGE:-ethpandaops/ream:master}
     container_name: ream-node1
     command: >
       --data-dir /data
