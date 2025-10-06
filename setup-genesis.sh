@@ -20,9 +20,9 @@ mkdir -p leanview-data
 REAM_IMAGE=${REAM_IMAGE:-"ghcr.io/reamlabs/ream:latest"}
 echo "Using Docker image: ${REAM_IMAGE}"
 
-# Generate 4 private keys for the nodes
-echo -e "${YELLOW}Generating private keys for 4 nodes...${NC}"
-for i in {0..3}; do
+# Generate 6 private keys for the nodes
+echo -e "${YELLOW}Generating private keys for 6 nodes...${NC}"
+for i in {0..5}; do
     echo "Generating private key for ${i}th node..."
     docker run --rm -v $(pwd)/config/keys:/keys ${REAM_IMAGE} \
         generate_private_key --output-path /keys/node${i}.key
@@ -30,7 +30,7 @@ done
 
 # Read the generated private keys
 declare -a PRIVATE_KEYS
-for i in {0..3}; do
+for i in {0..5}; do
     PRIVATE_KEYS[$i]=$(cat config/keys/node${i}.key)
     echo "Node ${i} private key: ${PRIVATE_KEYS[$i]:0:20}..."
 done
@@ -59,8 +59,8 @@ for i in {0..1}; do
 EOF
 done
 
-# Zeam: node 2
-for i in {2..2}; do
+# Zeam: node 2, 3
+for i in {2..3}; do
     NODE_IP="172.20.0.$((10 + i))"
     NODE_PORT=9000  # All nodes use port 9000 internally
 
@@ -76,8 +76,8 @@ for i in {2..2}; do
 EOF
 done
 
-# Qlean: node 3
-for i in {3..3}; do
+# Qlean: node 4, 5
+for i in {4..5}; do
     NODE_IP="172.20.0.$((10 + i))"
     NODE_PORT=9000  # All nodes use port 9000 internally
 

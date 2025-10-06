@@ -96,16 +96,17 @@ services:
     restart: unless-stopped
 
   node3:
-    image: qdrvm/qlean-mini:334b29c
-    container_name: qlean-node3
+    image: ${ZEAM_IMAGE:-g11tech/zeam:latest}
+    container_name: zeam-node3
+    security_opt:
+      - seccomp=unconfined
     command: >
-      --data-dir /data
-      --genesis /genesis/config.yaml
-      --validator-registry-path /genesis/validators.yaml
-      --node-id qlean_3
+      node 
+      --data-dir /data 
+      --custom_genesis /genesis 
+      --validator_config genesis_bootnode
+      --node-id zeam_3
       --node-key /config/keys/node3.key
-      --listen-addr /ip4/0.0.0.0/udp/9000/quic-v1
-      --bootnodes /genesis/nodes.yaml
     ports:
       - "9003:9000/udp"
       - "5055:5052"
@@ -121,6 +122,65 @@ services:
       - node0
       - node1
       - node2
+    restart: unless-stopped
+
+  node4:
+    image: qdrvm/qlean-mini:334b29c
+    container_name: qlean-node4
+    command: >
+      --data-dir /data
+      --genesis /genesis/config.yaml
+      --validator-registry-path /genesis/validators.yaml
+      --node-id qlean_4
+      --node-key /config/keys/node4.key
+      --listen-addr /ip4/0.0.0.0/udp/9000/quic-v1
+      --bootnodes /genesis/nodes.yaml
+    ports:
+      - "9004:9000/udp"
+      - "5056:5052"
+      - "8084:8080"
+    volumes:
+      - ./config:/config:ro
+      - ./genesis:/genesis:ro
+      - node4-data:/data
+    networks:
+      ream-network:
+        ipv4_address: 172.20.0.14
+    depends_on:
+      - node0
+      - node1
+      - node2
+      - node3
+    restart: unless-stopped
+
+  node5:
+    image: qdrvm/qlean-mini:334b29c
+    container_name: qlean-node5
+    command: >
+      --data-dir /data
+      --genesis /genesis/config.yaml
+      --validator-registry-path /genesis/validators.yaml
+      --node-id qlean_5
+      --node-key /config/keys/node5.key
+      --listen-addr /ip4/0.0.0.0/udp/9000/quic-v1
+      --bootnodes /genesis/nodes.yaml
+    ports:
+      - "9005:9000/udp"
+      - "5057:5052"
+      - "8085:8080"
+    volumes:
+      - ./config:/config:ro
+      - ./genesis:/genesis:ro
+      - node5-data:/data
+    networks:
+      ream-network:
+        ipv4_address: 172.20.0.15
+    depends_on:
+      - node0
+      - node1
+      - node2
+      - node3
+      - node4
     restart: unless-stopped
 
   backend:
@@ -187,3 +247,5 @@ volumes:
   node1-data:
   node2-data:
   node3-data:
+  node4-data:
+  node5-data:
