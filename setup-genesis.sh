@@ -133,7 +133,7 @@ docker run --rm -v $(pwd):/data -it ethpandaops/eth-beacon-genesis:pk910-leancha
 echo -e "${GREEN}Genesis state generation complete!${NC}"
 echo ""
 echo "Generated files:"
-echo "  - config/keys/node*.key (4 private keys)"
+echo "  - config/keys/node*.key (6 private keys)"
 echo "  - config.yaml"
 echo "  - genesis/genesis.json"
 echo "  - genesis/genesis.ssz"
