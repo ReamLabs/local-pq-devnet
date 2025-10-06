@@ -59,13 +59,30 @@ for i in {0..1}; do
 EOF
 done
 
-# Zeam: node 2, node 3
-for i in {2..3}; do
+# Zeam: node 2
+for i in {2..2}; do
     NODE_IP="172.20.0.$((10 + i))"
     NODE_PORT=9000  # All nodes use port 9000 internally
 
     cat >> ./genesis/validator-config.yaml << EOF
   - name: "zeam_${i}"
+    privkey: "${PRIVATE_KEYS[$i]}"
+    enrFields:
+      ip: "${NODE_IP}"
+      quic: ${NODE_PORT}
+      seq: 1
+    count: 1
+
+EOF
+done
+
+# Qlean: node 3
+for i in {3..3}; do
+    NODE_IP="172.20.0.$((10 + i))"
+    NODE_PORT=9000  # All nodes use port 9000 internally
+
+    cat >> ./genesis/validator-config.yaml << EOF
+  - name: "qlean_${i}"
     privkey: "${PRIVATE_KEYS[$i]}"
     enrFields:
       ip: "${NODE_IP}"

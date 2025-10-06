@@ -96,17 +96,16 @@ services:
     restart: unless-stopped
 
   node3:
-    image: ${ZEAM_IMAGE:-g11tech/zeam:latest}
-    container_name: zeam-node3
-    security_opt:
-      - seccomp=unconfined
+    image: qdrvm/qlean-mini:334b29c
+    container_name: qlean-node3
     command: >
-      node 
-      --data-dir /data 
-      --custom_genesis /genesis 
-      --validator_config genesis_bootnode
-      --node-id zeam_3 
+      --data-dir /data
+      --genesis /genesis/config.yaml
+      --validator-registry-path /genesis/validators.yaml
+      --node-id qlean_3
       --node-key /config/keys/node3.key
+      --listen-addr /ip4/0.0.0.0/udp/9000/quic-v1
+      --bootnodes /genesis/nodes.yaml
     ports:
       - "9003:9000/udp"
       - "5055:5052"
