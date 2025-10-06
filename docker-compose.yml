@@ -68,24 +68,17 @@ services:
     restart: unless-stopped
 
   node2:
-    image: ${REAM_IMAGE:-ghcr.io/reamlabs/ream:latest}
-    container_name: ream-node2
+    image: ${ZEAM_IMAGE:-g11tech/zeam:latest}
+    container_name: zeam-node2
+    security_opt:
+      - seccomp=unconfined
     command: >
-      --data-dir /data
-      lean_node
-      --network /genesis/config.yaml
-      --validator-registry-path /genesis/validators.yaml
-      --node-id ream_2
-      --private-key-path /config/keys/node2.key
-      --socket-address 172.20.0.12
-      --socket-port 9000
-      --http-address 0.0.0.0
-      --http-port 5052
-      --http-allow-origin
-      --bootnodes /genesis/nodes.yaml
-      --metrics
-      --metrics-address 0.0.0.0
-      --metrics-port 8080
+      node 
+      --data-dir /data 
+      --custom_genesis /genesis 
+      --validator_config genesis_bootnode
+      --node-id zeam_2 
+      --node-key /config/keys/node2.key
     ports:
       - "9002:9000/udp"
       - "5054:5052"

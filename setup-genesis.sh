@@ -41,8 +41,8 @@ shuffle: roundrobin
 validators:
 EOF
 
-# Add 4 nodes, each with 2 validators
-for i in {0..2}; do
+# Ream: node 0, node 1
+for i in {0..1}; do
     NODE_IP="172.20.0.$((10 + i))"
     NODE_PORT=9000  # All nodes use port 9000 internally
 
@@ -57,8 +57,9 @@ for i in {0..2}; do
 
 EOF
 done
-# Add 4 nodes, each with 2 validators
-for i in {3..3}; do
+
+# Zeam: node 2, node 3
+for i in {2..3}; do
     NODE_IP="172.20.0.$((10 + i))"
     NODE_PORT=9000  # All nodes use port 9000 internally
 
