@@ -22,7 +22,7 @@ echo "Using Docker image: ${REAM_IMAGE}"
 # Generate 4 private keys for the nodes
 echo -e "${YELLOW}Generating private keys for 4 nodes...${NC}"
 for i in {0..3}; do
-    echo "Generating private key for ream_${i}..."
+    echo "Generating private key for ${i}th node..."
     docker run --rm -v $(pwd)/config/keys:/keys ${REAM_IMAGE} \
         generate_private_key --output-path /keys/node${i}.key
 done
@@ -116,12 +116,12 @@ echo -e "${GREEN}Genesis state generation complete!${NC}"
 echo ""
 echo "Generated files:"
 echo "  - config/keys/node*.key (4 private keys)"
-echo "  - validator-config.yaml"
 echo "  - config.yaml"
 echo "  - genesis/genesis.json"
 echo "  - genesis/genesis.ssz"
 echo "  - genesis/config.yaml"
 echo "  - genesis/nodes.yaml"
 echo "  - genesis/validators.yaml"
+echo "  - genesis/validator-config.yaml"
 echo ""
 echo -e "${GREEN}Setup complete! You can now run the nodes with docker-compose.${NC}"
