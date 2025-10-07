@@ -28,6 +28,12 @@ rm -rf genesis/
 rm -f validator-config.yaml
 rm -f config.yaml
 
+# Remove leanview data directory if it exists
+if [ -d "leanview-data" ]; then
+    echo -e "${YELLOW}Removing leanview-data directory...${NC}"
+    rm -rf leanview-data/
+fi
+
 # Remove any leftover Docker networks
 echo -e "${YELLOW}Removing Docker network...${NC}"
 docker network rm local-pq-devnet_ream-network 2>/dev/null || true

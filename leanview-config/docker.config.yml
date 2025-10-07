@@ -1,0 +1,13 @@
+leanapi:
+  endpoints:
+    - name: "ream-node0"
+      url: "http://node0:5052"
+    - name: "ream-node1"
+      url: "http://node1:5052"
+    # - name: "node2"
+    #   url: "http://node2:5052"
+    # - name: "node3"
+    #   url: "http://node3:5052"
+
+database:
+  file: "/app/data/lean-view.sqlite"
